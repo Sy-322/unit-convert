@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>長さの単位換算</title>
+  <style>
+
+
+
+  </style>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+  <div class="converter">
+<h1>長さの単位換算</h1>
+<input type="number" id="inputValue" placeholder="数値を入力" />
+<select id="fromUnit">
+  <option value="meter">メートル</option>
+  <option value="kilometer">キロメートル</option>
+  <option value="mile">マイル</option>
+  <option value="chain">チェーン</option>
+  <option value="yard">ヤード</option>
+  <option value="foot">フィート</option>
+  <option value="inch">インチ</option>
+  <option value="mickey">ミッキー</option>
+  <option value="au">天文単位</option>
+  <option value="cun">寸</option>
+  <option value="nautical">海里</option>
+</select>
+<select id="toUnit">
+  <option value="meter">メートル</option>
+  <option value="kilometer">キロメートル</option>
+  <option value="mile">マイル</option>
+  <option value="yard">ヤード</option>
+  <option value="foot">フィート</option>
+  <option value="inch">インチ</option>
+  <option value="mickey">ミッキー</option>
+  <option value="au">天文単位</option>
+  <option value="cun">寸</option>
+  <option value="nautical">海里</option>
+</select>
+<button class="swap-btn" id="swapButton">⇄ 単位を入れ替える</button>
+<div class="result" id="result">結果がここに表示されます</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
