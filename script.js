@@ -17,16 +17,20 @@ const from = document.getElementById("fromUnit");
 const to = document.getElementById("toUnit");
 const result = document.getElementById("result");
 const swapButton = document.getElementById("swapButton");
-
-function convert() {
-      const value = parseFloat(input.value);
-      if (isNaN(value)) {
-        result.textContent = "数値を入力してください。";
-        return;
+    function convert() {
+      try {
+        const expression = input.value;
+        const value = math.evaluate(expression); // math.jsで式を評価
+        if (isNaN(value)) {
+          result.textContent = "式の評価に失敗しました。";
+          return;
+        }
+        const meterValue = value / conversionRates[from.value];
+        const convertedValue = meterValue * conversionRates[to.value];
+        result.textContent = `${convertedValue.toFixed(9)} ${to.options[to.selectedIndex].text}`;
+      } catch (error) {
+        result.textContent = "無効な数式です。";
       }
-      const meterValue = value / conversionRates[from.value];
-      const convertedValue = meterValue * conversionRates[to.value];
-      result.textContent = `${convertedValue.toFixed(9)} ${to.options[to.selectedIndex].text}`;
     }
 
     function swapUnits() {
