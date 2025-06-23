@@ -19,6 +19,10 @@ input, select, button {
   box-sizing: border-box;
   line-height: 1.2;
   height: 3rem;
+  border: 1px solid #595857;
+}
+select{
+  color:gray;
 }
 h1 {
   text-align: center;
@@ -37,4 +41,36 @@ h1 {
 
 .swap-btn:hover {
   background-color: #45a049;
+}
+
+.precision-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.precision-row button {
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.5rem;
+  padding: 0;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+.precision-row button:hover {
+  background-color: #45a049;
+}
+
+.precision-row input {
+  flex: 1;
+  height: 3rem;
+  font-size: 1rem;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+.tool {
+  margin-top: 1rem;
 }
