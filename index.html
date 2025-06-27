@@ -4,17 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>長さの単位換算</title>
+  <style>
+
+
+
+  </style>
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
   <div class="converter">
 <h1>長さの単位換算</h1>
-<input type="number" id="inputValue" placeholder="変換元の数値を入力" />
+<input type="number" id="inputValue" placeholder="変換元の数値を入力（半角）" />
 <select id="fromUnit" onchange="changeColor(this)">
   <option value="" selected>変換元の数値の単位を入力</option>
   <option value="centimeter">センチメートル</option>
   <option value="meter">メートル</option>
   <option value="kilometer">キロメートル</option>
+  <option value="micrometer">マイクロメートル</option>
   <option value="mile">マイル</option>
   <option value="chain">チェーン</option>
   <option value="yard">ヤード</option>
@@ -25,12 +31,14 @@
   <option value="ly">光年</option>
   <option value="cun">寸</option>
   <option value="nautical">海里</option>
+  <option value="bohr">ボーア半径</option>
 </select>
 <select id="toUnit" onchange="changeColor(this)">
   <option value="" selected>変換先の数値の単位を入力</option>
   <option value="centimeter">センチメートル</option>
   <option value="meter">メートル</option>
   <option value="kilometer">キロメートル</option>
+  <option value="micrometer">マイクロメートル</option>
   <option value="mile">マイル</option>
   <option value="yard">ヤード</option>
   <option value="foot">フィート</option>
@@ -40,16 +48,32 @@
   <option value="ly">光年</option>
   <option value="cun">寸</option>
   <option value="nautical">海里</option>
+  <option value="bohr">ボーア半径</option>
 </select>
 <div class="tool">ツール：</div>
 <div class="precision-row">
-<button class="swap-btn" id="swapButton" title="単位を入れ替える">⇅</button>
-<input type="number" class="pre" id="precision" min="0" value="9" placeholder="切り捨てる位を入力（小数点○位の○の部分）" />
+  <button class="swap-btn" id="swapButton" title="単位を入れ替える">⇅</button>
+  <input type="number" class="pre" id="precision" min="0" value="4" placeholder="切り捨てる位を入力" />
 </div>
-<div class="result" id="result">結果がここに表示されます</div>
-  </div>
+  <div class="result" id="result">結果がここに表示されます</div>
+</div>
 
-  <script src="script.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjs@12/lib/browser/math.min.js"></script>
+<script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjs@12/lib/browser/math.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!---%25E3%2581%2593%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E8%25A6%258B%25E3%2581%25A4%25E3%2581%2591%25E3%2581%259F%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AF%25E3%2580%2581%25E7%259B%25B8%25E5%25BD%2593%25E6%259A%2587%25E3%2581%25AA%25E3%2582%2593%25E3%2581%2598%25E3%2582%2583%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%259F--->
 </body>
 </html>
