@@ -48,64 +48,84 @@ const unitSymbols = {
   bohr: "α₀"
 };
 
-function changeColor(hoge){
-    if( hoge.value == 0 ){
-        hoge.style.color = '';
-    }else{
-        hoge.style.color = 'black';
-    }
-}
-
-const input = document.getElementById("inputValue");
-const from = document.getElementById("fromUnit");
-const to = document.getElementById("toUnit");
-const result = document.getElementById("result");
-const swapButton = document.getElementById("swapButton");
-document.getElementById("precision").addEventListener("input", convert);
-
-
-function convert() {
-  try {
-    const expression = input.value.trim();
-    const fromValue = from.value;
-    const toValue = to.value;
- const precisionValue = document.getElementById("precision").value;
-const precision = Math.min(1000, Math.max(0, parseInt(precisionValue) || 0)); // ← 最大100に制限
-
-    // 単位未選択チェック
-    if (!fromValue || !toValue) {
-      result.textContent = "両方の単位を選択してください。";
-      return;
-    }
-
-    // 数式評価（math.js）
-    const value = math.evaluate(expression);
-    if (!isFinite(value)) {
-      result.textContent = "式の評価に失敗しました。";
-      return;
-    }
-
-    // 換算
-    const meterValue = value / conversionRates[fromValue];
-    const convertedValue = meterValue * conversionRates[toValue];
-    const unitSymbol = unitSymbols[toValue] || toValue;
-result.textContent = `${convertedValue.toFixed(precision)} ${unitSymbol}`;
-
-  } catch (error) {
-    result.textContent = "無効な数式です。";
+function changeColor(hoge) {
+  if (hoge.value == 0) {
+    hoge.style.color = '';
+  } else {
+    hoge.style.color = 'black';
   }
 }
 
+window.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("inputValue");
+  const from = document.getElementById("fromUnit");
+  const to = document.getElementById("toUnit");
+  const result = document.getElementById("result");
+  const swapButton = document.getElementById("swapButton");
+  const precisionInput = document.getElementById("precision");
 
+  const savedInput = localStorage.getItem("inputValue");
+  const savedFrom = localStorage.getItem("fromUnit");
+  const savedTo = localStorage.getItem("toUnit");
+  const savedPrecision = localStorage.getItem("precision");
 
-    function swapUnits() {
-      const temp = from.value;
-      from.value = to.value;
-      to.value = temp;
-      convert();
+  if (savedInput !== null) input.value = savedInput;
+  if (savedFrom !== null) {
+    from.value = savedFrom;
+    changeColor(from); // ← 追加！
+  }
+  if (savedTo !== null) {
+    to.value = savedTo;
+    changeColor(to);   // ← 追加！
+  }
+  if (savedPrecision !== null) precisionInput.value = savedPrecision;
+
+  function convert() {
+    try {
+      const expression = input.value.trim();
+      const fromValue = from.value;
+      const toValue = to.value;
+      const precisionValue = precisionInput.value;
+      const precision = Math.min(100, Math.max(0, parseInt(precisionValue) || 0));
+
+      if (!fromValue || !toValue) {
+        result.textContent = "両方の単位を選択してください。";
+        return;
+      }
+
+      const value = math.evaluate(expression);
+      if (!isFinite(value)) {
+        result.textContent = "式の評価に失敗しました。";
+        return;
+      }
+
+      const meterValue = value / conversionRates[fromValue];
+      const convertedValue = meterValue * conversionRates[toValue];
+      const unitSymbol = unitSymbols[toValue] || toValue;
+
+      result.textContent = `${convertedValue.toFixed(precision)} ${unitSymbol}`;
+
+      localStorage.setItem("inputValue", expression);
+      localStorage.setItem("fromUnit", fromValue);
+      localStorage.setItem("toUnit", toValue);
+      localStorage.setItem("precision", precisionValue);
+    } catch (error) {
+      result.textContent = "無効な数式です。";
     }
+  }
 
-    input.addEventListener("input", convert);
-    from.addEventListener("change", convert);
-    to.addEventListener("change", convert);
-    swapButton.addEventListener("click", swapUnits);
+  function swapUnits() {
+    const temp = from.value;
+    from.value = to.value;
+    to.value = temp;
+    convert();
+  }
+
+  input.addEventListener("input", convert);
+  from.addEventListener("change", convert);
+  to.addEventListener("change", convert);
+  precisionInput.addEventListener("input", convert);
+  swapButton.addEventListener("click", swapUnits);
+
+  convert(); 
+});
