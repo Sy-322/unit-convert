@@ -3,64 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="長さの単位を変換できるサイトです。追加して欲しい単位があればGithubで">
+  <meta name="description" content="長さの単位を変換できるサイトです。その他要望があればGithubでお願いします">
   <title>長さの単位換算</title>
-  <style>
-
-
-
-  </style>
   <link rel="stylesheet" type="text/css" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="converter">
-<h1>長さの単位換算</h1>
-<input type="number" id="inputValue" placeholder="変換元の数値を入力（半角）" />
-<select id="fromUnit" onchange="changeColor(this)">
-  <option value="" selected>変換元の数値の単位を入力</option>
-  <option value="centimeter">センチメートル</option>
-  <option value="meter">メートル</option>
-  <option value="kilometer">キロメートル</option>
-  <option value="micrometer">マイクロメートル</option>
-  <option value="mile">マイル</option>
-  <option value="chain">チェーン</option>
-  <option value="yard">ヤード</option>
-  <option value="foot">フィート</option>
-  <option value="inch">インチ</option>
-  <option value="mickey">ミッキー</option>
-  <option value="au">天文単位</option>
-  <option value="ly">光年</option>
-  <option value="cun">寸</option>
-  <option value="nautical">海里</option>
-  <option value="bohr">ボーア半径</option>
-</select>
-<select id="toUnit" onchange="changeColor(this)">
-  <option value="" selected>変換先の数値の単位を入力</option>
-  <option value="centimeter">センチメートル</option>
-  <option value="meter">メートル</option>
-  <option value="kilometer">キロメートル</option>
-  <option value="micrometer">マイクロメートル</option>
-  <option value="mile">マイル</option>
-  <option value="yard">ヤード</option>
-  <option value="foot">フィート</option>
-  <option value="inch">インチ</option>
-  <option value="mickey">ミッキー</option>
-  <option value="au">天文単位</option>
-  <option value="ly">光年</option>
-  <option value="cun">寸</option>
-  <option value="nautical">海里</option>
-  <option value="bohr">ボーア半径</option>
-</select>
-<div class="tool">ツール：</div>
-<div class="precision-row">
-  <button class="swap-btn" id="swapButton" title="単位を入れ替える">⇅</button>
-  <input type="number" class="pre" id="precision" min="0" value="4" placeholder="切り捨てる位を入力" />
-</div>
-  <div class="result" id="result">結果がここに表示されます</div>
-</div>
+    <h1>長さの単位換算</h1>
+      <input type="number" id="inputValue" placeholder="変換元の数値を入力（半角）" />
+      <select id="fromUnit" onchange="changeColor(this)">
+        <option value="" selected>変換元の数値の単位を入力</option>
+        <option value="centimeter">センチメートル</option>
+        <option value="meter">メートル</option>
+        <option value="kilometer">キロメートル</option>
+        <option value="micrometer">マイクロメートル</option>
+        <option value="mile">マイル</option>
+        <option value="chain">チェーン</option>
+        <option value="yard">ヤード</option>
+        <option value="foot">フィート</option>
+        <option value="inch">インチ</option>
+        <option value="mickey">ミッキー</option>
+        <option value="au">天文単位</option>
+        <option value="ly">光年</option>
+        <option value="cun">寸</option>
+        <option value="nautical">海里</option>
+        <option value="bohr">ボーア半径</option>
+      </select>
+      <select id="toUnit" onchange="changeColor(this)">
+        <option value="" selected>変換先の数値の単位を入力</option>
+        <option value="centimeter">センチメートル</option>
+        <option value="meter">メートル</option>
+        <option value="kilometer">キロメートル</option>
+        <option value="micrometer">マイクロメートル</option>
+        <option value="mile">マイル</option>
+        <option value="yard">ヤード</option>
+        <option value="foot">フィート</option>
+        <option value="inch">インチ</option>
+        <option value="mickey">ミッキー</option>
+        <option value="au">天文単位</option>
+        <option value="ly">光年</option>
+        <option value="cun">寸</option>
+        <option value="nautical">海里</option>
+        <option value="bohr">ボーア半径</option>
+    </select>
+    <div class="result" id="result">結果がここに表示されます</div>
+    <hr>
+    <div class="tool">ツール：
+      <div class="precision-row">
+        <button class="swap-btn" id="swapButton" title="単位を入れ替える">⇅</button>
+        <input type="number" class="pre" id="precision" min="0" max="100" value="" placeholder="切り捨てる位を入力" />
+      </div>
+    </div>
+  </div>
 
-<script src="script.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/mathjs@12/lib/browser/math.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjs@12/lib/browser/math.min.js"></script>
+  <script src="script.js"></script>
+  <!--<div class="usage">
+    <h2>
+      〜使い方〜
+    </h2>
+    <h4>
+      1.一番上のボックスに、変換したい数字を入れます。<br>
+      2.次に変換したい数字の単位を入れます。<br>
+      3.単位を入力したら、変換先の単位も入れます。<br>
+      4.すると結果が表示されます。<br>
+      <br>
+      <br>
+      <br>
+      <h3>+α　〜「ツール」でできること〜<br></h3>
+      <br>
+      単位を入れ替えることと、丸める位を決めることができます。<br>
+       
+    </h4>
+  </div>-->
 
 
 
@@ -72,11 +88,8 @@
 
 
 
-
-
-
-<!---%25E3%2581%2593%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E8%25A6%258B%25E3%2581%25A4%25E3%2581%2591%25E3%2581%259F%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AF%25E3%2580%2581%25E7%259B%25B8%25E5%25BD%2593%25E6%259A%2587%25E3%2581%25AA%25E3%2582%2593%25E3%2581%2598%25E3%2582%2583%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%259F--->
+  
+  
+  <!---%2525E3%252581%252593%2525E3%252581%2525AE%2525E3%252583%252586%2525E3%252582%2525AD%2525E3%252582%2525B9%2525E3%252583%252588%2525E3%252582%252592%2525E8%2525A6%25258B%2525E3%252581%2525A4%2525E3%252581%252591%2525E3%252581%25259F%2525E3%252581%2525A3%2525E3%252581%2525A6%2525E3%252581%252593%2525E3%252581%2525A8%2525E3%252581%2525AF%2525E3%252580%252581%2525E7%25259B%2525B8%2525E5%2525BD%252593%2525E6%25259A%252587%2525E3%252581%2525AA%2525E3%252582%252593%2525E3%252581%252598%2525E3%252582%252583%2525E3%252581%2525AA%2525E3%252581%252584%2525EF%2525BC%25259F--->
 </body>
 </html>
-
-
