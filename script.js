@@ -1,3 +1,8 @@
+math.config({
+  number: 'BigNumber',
+  precision: 1000
+});
+
 const conversionRates = {
   centimeter: 0.01,
   meter: 1,
@@ -85,8 +90,9 @@ window.addEventListener("DOMContentLoaded", () => {
       const expression = input.value.trim();
       const fromValue = from.value;
       const toValue = to.value;
-      const precisionValue = precisionInput.value;
-      const precision = Math.min(100, Math.max(0, parseInt(precisionValue) || 0));
+      const precisionValue = document.getElementById("precision").value;
+      const precision = Math.max(0, parseInt(precisionValue) || 0); 
+
 
       if (!fromValue || !toValue) {
         result.textContent = "両方の単位を選択してください。";
@@ -102,8 +108,15 @@ window.addEventListener("DOMContentLoaded", () => {
       const meterValue = value / conversionRates[fromValue];
       const convertedValue = meterValue * conversionRates[toValue];
       const unitSymbol = unitSymbols[toValue] || toValue;
+      const bigValue = math.bignumber(convertedValue);
+      const formattedValue = math.format(convertedValue, {
+        notation: 'fixed',
+        lowerExp: -1000,
+        upperExp: 1000,
+        precision: precision
+      });
 
-      result.textContent = `${convertedValue.toFixed(precision)} ${unitSymbol}`;
+      result.textContent = `${formattedValue} ${unitSymbol}`;
 
       localStorage.setItem("inputValue", input.value);
       localStorage.setItem("fromUnit", from.value ?? "");
