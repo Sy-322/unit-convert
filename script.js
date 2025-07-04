@@ -95,7 +95,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
       const value = math.evaluate(expression);
       if (!isFinite(value)) {
-        result.textContent = "式の評価に失敗しました。";
+        result.textContent = "数値が無効もしくは空欄です。";
         return;
       }
 
@@ -105,10 +105,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
       result.textContent = `${convertedValue.toFixed(precision)} ${unitSymbol}`;
 
-      localStorage.setItem("inputValue", expression);
-      localStorage.setItem("fromUnit", fromValue);
-      localStorage.setItem("toUnit", toValue);
-      localStorage.setItem("precision", precisionValue);
+      localStorage.setItem("inputValue", input.value);
+      localStorage.setItem("fromUnit", from.value ?? "");
+      localStorage.setItem("toUnit", to.value ?? "");
+      localStorage.setItem("precision", precisionInput.value ?? "");
+
     } catch (error) {
       result.textContent = "無効な数式です。";
     }
