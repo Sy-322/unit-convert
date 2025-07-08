@@ -11,7 +11,7 @@
 <body>
   <div class="converter">
     <h1>長さの単位換算</h1>
-      <input type="number" id="inputValue" placeholder="変換元の数値を入力（半角）" />
+      <input id="inputValue" placeholder="変換元の数値を入力（半角）" />
       <select id="fromUnit" onchange="changeColor(this)">
         <option value="" selected>変換元の数値の単位を入力</option>
         <option value="centimeter">センチメートル</option>
@@ -52,7 +52,7 @@
     <div class="tool">ツール：
       <div class="precision-row">
         <button class="swap-btn" id="swapButton" title="単位を入れ替える">⇅</button>
-        <input type="number" class="pre" id="precision" min="0" max="1000" value="" placeholder="切り捨てる位を入力(1000まで)" />
+        <input type="text" class="pre" id="precision" min="0" max="1000" maxlength="4" pattern="^[0-9]{1,4}$" value="" placeholder="切り捨てる位を入力(1000まで)" />
       </div>
     </div>
   </div>
@@ -60,6 +60,24 @@
   <script src="https://cdn.jsdelivr.net/npm/mathjs@12/lib/browser/math.min.js"></script>
   <script src="script.js"></script>
   <div>
+  <!--<div class="usage">
+    <h2>
+      〜使い方〜
+    </h2>
+    <h4>
+      1.一番上のボックスに、変換したい数字を入れます。<br>
+      2.次に変換したい数字の単位を入れます。<br>
+      3.単位を入力したら、変換先の単位も入れます。<br>
+      4.すると結果が表示されます。<br>
+      <br>
+      <br>
+      <br>
+      <h3>+α　〜「ツール」でできること〜<br></h3>
+      <br>
+      単位を入れ替えることと、丸める位を決めることができます。<br>
+       
+    </h4>
+  </div>-->
 
 
 
