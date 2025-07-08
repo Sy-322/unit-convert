@@ -41,7 +41,7 @@ const unitSymbols = {
   furlong: "fur",
   chain: "ch",
   mickey: "mickey",
-  nautical: "nm",
+  nautical: "nmi",
   au: "AU",
   ly: "ly",
   cun: "寸",
@@ -51,6 +51,14 @@ const unitSymbols = {
   chō: "町",
   li: "里",
   bohr: "α₀"
+};
+
+const inputAliases = {
+  "π": "pi",
+  "σ": "sqrt(2)",
+  "ϕ": "(1 + sqrt(5)) / 2",
+  "√2": "sqrt(2)",
+  "√3": "sqrt(3)"
 };
 
 function changeColor(hoge) {
@@ -86,49 +94,54 @@ window.addEventListener("DOMContentLoaded", () => {
   if (savedPrecision !== null) precisionInput.value = savedPrecision;
 
   function convert() {
-    try {
-      const expression = input.value.trim();
-      const fromValue = from.value;
-      const toValue = to.value;
-      const precisionValue = document.getElementById("precision").value;
-      const precision = Math.max(0, parseInt(precisionValue) || 0);
+  try {
+    let expression = input.value.trim();
+    const fromValue = from.value;
+    const toValue = to.value;
+    const precisionValue = document.getElementById("precision").value;
+    const precision = Math.min(1000, Math.max(0, parseInt(precisionValue) || 0));
 
-      if (!fromValue || !toValue) {
-        result.textContent = "両方の単位を選択してください。";
-        return;
-      }
-
-      let value;
-      try {
-        value = math.bignumber(expression);
-      } catch {
-        value = math.evaluate(expression);
-      }
-
-      const fromRate = conversionRates[fromValue];
-      const toRate = conversionRates[toValue];
-
-      const meterValue = math.divide(value, fromRate);
-      const convertedValue = math.multiply(meterValue, toRate);
-
-      const formattedValue = math.format(convertedValue, {
-        notation: 'fixed',
-        lowerExp: -1000,
-        upperExp: 1000,
-        precision: precision
-      });
-
-      const unitSymbol = unitSymbols[toValue] || toValue;
-      result.textContent = `${formattedValue} ${unitSymbol}`;
-
-      localStorage.setItem("inputValue", expression);
-      localStorage.setItem("fromUnit", fromValue);
-      localStorage.setItem("toUnit", toValue);
-      localStorage.setItem("precision", precisionValue);
-    } catch (error) {
-      result.textContent = "無効な数式です。";
+    if (!fromValue || !toValue) {
+      result.textContent = "両方の単位を選択してください。";
+      return;
     }
+
+    if (inputAliases.hasOwnProperty(expression)) {
+      expression = inputAliases[expression];
+    }
+
+    let value;
+    try {
+      value = math.bignumber(math.evaluate(expression));
+    } catch {
+      result.textContent = "無効な数式です。";
+      return;
+    }
+
+    const fromRate = conversionRates[fromValue];
+    const toRate = conversionRates[toValue];
+
+    const meterValue = math.divide(value, fromRate);
+    const convertedValue = math.multiply(meterValue, toRate);
+
+    const formattedValue = math.format(convertedValue, {
+      notation: 'fixed',
+      lowerExp: -1000,
+      upperExp: 1000,
+      precision: precision
+    });
+
+    const unitSymbol = unitSymbols[toValue] || toValue;
+    result.textContent = `${formattedValue} ${unitSymbol}`;
+
+    localStorage.setItem("inputValue", input.value); 
+    localStorage.setItem("fromUnit", fromValue);
+    localStorage.setItem("toUnit", toValue);
+    localStorage.setItem("precision", precisionValue);
+  } catch (error) {
+    result.textContent = "無効な数式です。";
   }
+}
 
   function swapUnits() {
     const temp = from.value;
