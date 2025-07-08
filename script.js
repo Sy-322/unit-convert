@@ -4,28 +4,28 @@ math.config({
 });
 
 const conversionRates = {
-  centimeter: 0.01,
-  meter: 1,
-  kilometer: 1000,
-  micrometer: 0.000001,
-  nanometer: 0.000000001,
-  mile: 1/1609.344,
-  yard: 1/0.9144,
-  foot: 1/0.3048,
-  inch: 1/0.254,
-  furlong: 1/201.168,
-  chain: 1/20.1168,
-  mickey: 1/25.4,
-  nautical: 0.00053995680345572,
-  au: 1/149597870700,
-  ly: 1/9460730472580800,
-  cun: 1/(10/33),
-  shaku: 10/(10/33),
-  ken:  60/(10/33),
-  jō: 100/(10/33),
-  chō:  360/(10/33),
-  li: 12960/(10/33),
-  bohr: 1/0.0000000000529177210544,
+  centimeter: math.bignumber("0.01"),
+  meter: math.bignumber("1"),
+  kilometer: math.bignumber("1000"),
+  micrometer: math.bignumber("0.000001"),
+  nanometer: math.bignumber("0.000000001"),
+  mile: math.bignumber(math.evaluate("1 / 1609.344")),
+  yard: math.bignumber(math.evaluate("1/0.9144")),
+  foot: math.bignumber(math.evaluate("1/0.3048")),
+  inch: math.bignumber(math.evaluate("1/0.254")),
+  furlong: math.bignumber(math.evaluate("1/201.168")),
+  chain: math.bignumber(math.evaluate("1/20.1168")),
+  mickey: math.bignumber(math.evaluate("1/25.4")),
+  nautical: math.bignumber("0.00053995680345572"),
+  au: math.bignumber(math.evaluate("1/149597870700")),
+  ly: math.bignumber(math.evaluate("1/9460730472580800")),
+  cun: math.bignumber(math.evaluate("1/(10/33)")),
+  shaku: math.bignumber(math.evaluate("10/(10/33)")),
+  ken: math.bignumber(math.evaluate("60/(10/33)")),
+  jō: math.bignumber(math.evaluate("100/(10/33)")),
+  chō: math.bignumber(math.evaluate("360/(10/33)")),
+  li: math.bignumber(math.evaluate("12960/(10/33)")),
+  bohr: math.bignumber(math.evaluate("1/0.0000000000529177210544")),
 };
 
 const unitSymbols = {
@@ -77,11 +77,11 @@ window.addEventListener("DOMContentLoaded", () => {
   if (savedInput !== null) input.value = savedInput;
   if (savedFrom !== null) {
     from.value = savedFrom;
-    changeColor(from); // ← 追加！
+    changeColor(from); 
   }
   if (savedTo !== null) {
     to.value = savedTo;
-    changeColor(to);   // ← 追加！
+    changeColor(to);  
   }
   if (savedPrecision !== null) precisionInput.value = savedPrecision;
 
@@ -91,24 +91,26 @@ window.addEventListener("DOMContentLoaded", () => {
       const fromValue = from.value;
       const toValue = to.value;
       const precisionValue = document.getElementById("precision").value;
-      const precision = Math.max(0, parseInt(precisionValue) || 0); 
-
+      const precision = Math.max(0, parseInt(precisionValue) || 0);
 
       if (!fromValue || !toValue) {
         result.textContent = "両方の単位を選択してください。";
         return;
       }
 
-      const value = math.evaluate(expression);
-      if (!isFinite(value)) {
-        result.textContent = "数値が無効もしくは空欄です。";
-        return;
+      let value;
+      try {
+        value = math.bignumber(expression);
+      } catch {
+        value = math.evaluate(expression);
       }
 
-      const meterValue = value / conversionRates[fromValue];
-      const convertedValue = meterValue * conversionRates[toValue];
-      const unitSymbol = unitSymbols[toValue] || toValue;
-      const bigValue = math.bignumber(convertedValue);
+      const fromRate = conversionRates[fromValue];
+      const toRate = conversionRates[toValue];
+
+      const meterValue = math.divide(value, fromRate);
+      const convertedValue = math.multiply(meterValue, toRate);
+
       const formattedValue = math.format(convertedValue, {
         notation: 'fixed',
         lowerExp: -1000,
@@ -116,13 +118,13 @@ window.addEventListener("DOMContentLoaded", () => {
         precision: precision
       });
 
+      const unitSymbol = unitSymbols[toValue] || toValue;
       result.textContent = `${formattedValue} ${unitSymbol}`;
 
-      localStorage.setItem("inputValue", input.value);
-      localStorage.setItem("fromUnit", from.value ?? "");
-      localStorage.setItem("toUnit", to.value ?? "");
-      localStorage.setItem("precision", precisionInput.value ?? "");
-
+      localStorage.setItem("inputValue", expression);
+      localStorage.setItem("fromUnit", fromValue);
+      localStorage.setItem("toUnit", toValue);
+      localStorage.setItem("precision", precisionValue);
     } catch (error) {
       result.textContent = "無効な数式です。";
     }
@@ -136,8 +138,8 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   input.addEventListener("input", convert);
-  from.addEventListener("change", convert);
-  to.addEventListener("change", convert);
+  from.addEventListener("change", () => { changeColor(from); convert(); });
+  to.addEventListener("change", () => { changeColor(to); convert(); });
   precisionInput.addEventListener("input", convert);
   swapButton.addEventListener("click", swapUnits);
 
