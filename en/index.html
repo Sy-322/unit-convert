@@ -3,68 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="長さの単位を変換できるサイトです。その他要望があればGithubでお願いします">
+  <meta name="description" content="This site allows you to convert units of length. If you have any other requests, please contact us at Github.">
   <meta http-equiv="Content-Security-Policy" content="script-src 'self'" />
-  <meta property="og:title" content="長さの単位変換ツール - 高精度なWeb計算サイト" />
-  <meta property="og:description" content="高精度な単位変換。cm, m, km, mileなど幅広く対応。" />
+  <meta property="og:title" content="Length Unit Conversion Tool - Highly Accurate Web Calculation Site" />
+  <meta property="og:description" content="High-precision unit conversion for a wide range of units including cm, m, km, mile, etc." />
   <meta property="og:url" content="https://sy-322.github.io/unit-convert/" />
   <meta property="og:type" content="website" />
-  <title>長さの単位換算</title>
-  <link rel="stylesheet" type="text/css" href="../unit-convert/style.css" />
+  <title>ength Unit Conversion</title>
+  <link rel="stylesheet" type="text/css" href="../style.css" />
   
   
 </head>
 <body>
   <div class="converter">
-    <h1>長さの単位換算</h1>
-      <input id="inputValue" placeholder="変換元の数値を入力（半角）" />
+    <h1>ength Unit Conversion</h1>
+      <input id="inputValue" placeholder="Enter the value of the conversion source" />
       <select id="fromUnit" onchange="changeColor(this)">
-        <option value="" selected>変換元の数値の単位を入力</option>
-        <option value="centimeter">センチメートル</option>
-        <option value="meter">メートル</option>
-        <option value="kilometer">キロメートル</option>
-        <option value="micrometer">マイクロメートル</option>
-        <option value="mile">マイル</option>
-        <option value="chain">チェーン</option>
-        <option value="yard">ヤード</option>
-        <option value="foot">フィート</option>
-        <option value="inch">インチ</option>
-        <option value="mickey">ミッキー</option>
-        <option value="au">天文単位</option>
-        <option value="ly">光年</option>
-        <option value="cun">寸</option>
-        <option value="nautical">海里</option>
-        <option value="bohr">ボーア半径</option>
+        <option value="" selected>Enter the unit of measure of the number you are converting from</option>
+        <option value="centimeter">centimetre</option>
+        <option value="meter">metre</option>
+        <option value="kilometer">kilometre</option>
+        <option value="micrometer">micrometre</option>
+        <option value="mile">mile</option>
+        <option value="chain">chain</option>
+        <option value="yard">yard</option>
+        <option value="foot">foot</option>
+        <option value="inch">inch</option>
+        <option value="mickey">mickey</option>
+        <option value="au">astronomical unit</option>
+        <option value="ly">light-year</option>
+        <option value="cun">cun</option>
+        <option value="nautical">nautical mile</option>
+        <option value="bohr">bohr radius</option>
       </select>
       <select id="toUnit" onchange="changeColor(this)">
-        <option value="" selected>変換先の数値の単位を入力</option>
-        <option value="centimeter">センチメートル</option>
-        <option value="meter">メートル</option>
-        <option value="kilometer">キロメートル</option>
-        <option value="micrometer">マイクロメートル</option>
-        <option value="mile">マイル</option>
-        <option value="yard">ヤード</option>
-        <option value="foot">フィート</option>
-        <option value="inch">インチ</option>
-        <option value="mickey">ミッキー</option>
-        <option value="au">天文単位</option>
-        <option value="ly">光年</option>
-        <option value="cun">寸</option>
-        <option value="nautical">海里</option>
-        <option value="bohr">ボーア半径</option>
+        <option value="" selected>Enter the unit of measure for the number to be converted</option>
+        <option value="centimeter">centimetre</option>
+        <option value="meter">metre</option>
+        <option value="kilometer">kilometre</option>
+        <option value="micrometer">micrometre</option>
+        <option value="mile">mile</option>
+        <option value="chain">chain</option>
+        <option value="yard">yard</option>
+        <option value="foot">foot</option>
+        <option value="inch">inch</option>
+        <option value="mickey">mickey</option>
+        <option value="au">astronomical unit</option>
+        <option value="ly">light-year</option>
+        <option value="cun">cun</option>
+        <option value="nautical">nautical mile</option>
+        <option value="bohr">bohr radius</option>
     </select>
-    <div class="result" id="result">結果がここに表示されます</div>
+    <div class="result" id="result">Results are displayed here</div>
     <hr>
-    <div class="tool">ツール：
+    <div class="tool">tool：
       <div class="precision-row">
-        <button class="swap-btn" id="swapButton" title="単位を入れ替える">⇅</button>
-        <input type="text" class="pre" id="precision" min="0" max="1000" maxlength="4" pattern="^[0-9]{1,4}$" value="" placeholder="切り捨てる位を入力(1000まで)" />
+        <button class="swap-btn" id="swapButton" title="replace the units">⇅</button>
+        <input type="text" class="pre" id="precision" min="0" max="1000" maxlength="4" pattern="^[0-9]{1,4}$" value="" placeholder="Enter the number of places to truncate (up to 1000)" />
       </div>
     </div>
   </div>
 
-  <script src="../unit-convert/math.min.js"></script>
-  <script src="../unit-convert/script.js"></script>
+  <script src="../math.min.js"></script>
+  <script src="../script.js"></script>
 
 
 
