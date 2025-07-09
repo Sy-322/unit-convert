@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="長さの単位を変換できるサイトです。その他要望があればGithubでお願いします">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self'" />
+  <meta property="og:title" content="長さの単位変換ツール - 高精度なWeb計算サイト" />
+  <meta property="og:description" content="高精度な単位変換。cm, m, km, mileなど幅広く対応。" />
+  <meta property="og:url" content="https://sy-322.github.io/unit-convert/" />
+  <meta property="og:type" content="website" />
+  <title>長さの単位換算</title>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  
+  
+</head>
+<body>
+  <div class="converter">
+    <h1>長さの単位換算</h1>
+      <input id="inputValue" placeholder="変換元の数値を入力（半角）" />
+      <select id="fromUnit" onchange="changeColor(this)">
+        <option value="" selected>変換元の数値の単位を入力</option>
+        <option value="centimeter">センチメートル</option>
+        <option value="meter">メートル</option>
+        <option value="kilometer">キロメートル</option>
+        <option value="micrometer">マイクロメートル</option>
+        <option value="mile">マイル</option>
+        <option value="chain">チェーン</option>
+        <option value="yard">ヤード</option>
+        <option value="foot">フィート</option>
+        <option value="inch">インチ</option>
+        <option value="mickey">ミッキー</option>
+        <option value="au">天文単位</option>
+        <option value="ly">光年</option>
+        <option value="cun">寸</option>
+        <option value="nautical">海里</option>
+        <option value="bohr">ボーア半径</option>
+      </select>
+      <select id="toUnit" onchange="changeColor(this)">
+        <option value="" selected>変換先の数値の単位を入力</option>
+        <option value="centimeter">センチメートル</option>
+        <option value="meter">メートル</option>
+        <option value="kilometer">キロメートル</option>
+        <option value="micrometer">マイクロメートル</option>
+        <option value="mile">マイル</option>
+        <option value="yard">ヤード</option>
+        <option value="foot">フィート</option>
+        <option value="inch">インチ</option>
+        <option value="mickey">ミッキー</option>
+        <option value="au">天文単位</option>
+        <option value="ly">光年</option>
+        <option value="cun">寸</option>
+        <option value="nautical">海里</option>
+        <option value="bohr">ボーア半径</option>
+    </select>
+    <div class="result" id="result">結果がここに表示されます</div>
+    <hr>
+    <div class="tool">ツール：
+      <div class="precision-row">
+        <button class="swap-btn" id="swapButton" title="単位を入れ替える">⇅</button>
+        <input type="text" class="pre" id="precision" min="0" max="1000" maxlength="4" pattern="^[0-9]{1,4}$" value="" placeholder="切り捨てる位を入力(1000まで)" />
+      </div>
+    </div>
+  </div>
+
+  <script src="math.min.js"></script>
+  <script src="script.js"></script>
+
+
+
+
+  
+  
+  <!---%2525E3%252581%252593%2525E3%252581%2525AE%2525E3%252583%252586%2525E3%252582%2525AD%2525E3%252582%2525B9%2525E3%252583%252588%2525E3%252582%252592%2525E8%2525A6%25258B%2525E3%252581%2525A4%2525E3%252581%252591%2525E3%252581%25259F%2525E3%252581%2525A3%2525E3%252581%2525A6%2525E3%252581%252593%2525E3%252581%2525A8%2525E3%252581%2525AF%2525E3%252580%252581%2525E7%25259B%2525B8%2525E5%2525BD%252593%2525E6%25259A%252587%2525E3%252581%2525AA%2525E3%252582%252593%2525E3%252581%252598%2525E3%252582%252583%2525E3%252581%2525AA%2525E3%252581%252584%2525EF%2525BC%25259F--->
+  </div>
+</body>
+</html>
