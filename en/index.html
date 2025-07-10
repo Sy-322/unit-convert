@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="This site allows you to convert units of length. If you have any other requests, please contact us at Github.">
+  <meta name="description" content="This site allows you to convert units of length. If you have any other requests, please contact us at Github. I am Japanese, so I use translations for some of my pages. If you find any typos or omissions, please send them to Github.">
   <meta http-equiv="Content-Security-Policy" content="script-src 'self'" />
   <meta property="og:title" content="Length Unit Conversion Tool - Highly Accurate Web Calculation Site" />
   <meta property="og:description" content="High-precision unit conversion for a wide range of units including cm, m, km, mile, etc." />
@@ -11,12 +11,16 @@
   <meta property="og:type" content="website" />
   <title>ength Unit Conversion</title>
   <link rel="stylesheet" type="text/css" href="../style.css" />
-  
+  <style>
+    .result,h1 {
+      font-size: 1.5em
+    }
+  </style>
   
 </head>
 <body>
   <div class="converter">
-    <h1>ength Unit Conversion</h1>
+    <h1>Length Unit Conversion</h1>
       <input id="inputValue" placeholder="Enter the value of the conversion source" />
       <select id="fromUnit" onchange="changeColor(this)">
         <option value="" selected>Enter the unit of measure of the number you are converting from</option>
@@ -63,6 +67,15 @@
       </div>
     </div>
   </div>
+  <div class="lang-switch">
+  <span class="lang-label">Language:</span>
+  <a href="../ja/index.html" title="日本語">
+    <img src="../img/flag-jp.svg" alt="日本語" class="flag" />
+  </a>
+  <a href="../en/index.html" title="English">
+    <img src="../img/flag-us.svg" alt="English" class="flag" />
+  </a>
+</div>
 
   <script src="../math.min.js"></script>
   <script src="../script.js"></script>
